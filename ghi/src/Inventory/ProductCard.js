@@ -7,8 +7,9 @@ import { Card } from "react-bootstrap";
 import "../Styles/ProductCard.css";
 import addtocart from "../Images/addtocart.png";
 
-export default function ProductCard({ product }) {
+export default function ProductCard(props) {
   const [showCartButton, setCartButton] = useState(false);
+  const { product, onAdd } = props;
 
   function showButton() {
     setCartButton(true);
@@ -30,19 +31,15 @@ export default function ProductCard({ product }) {
           src={product.picture_url}
           alt={product.name}
         />
-        {showCartButton && (
-          <button className="btn-xs btn-light rounded-pill cart-button">
-            <img src={addtocart} className="icon" alt="icon" />
-          </button>
-        )}
       </div>
       <Card.Body className="card-text-padding">
-        <Card.Text className="my-3">
-        {product.name}
-        </Card.Text>
-        <Card.Text className="my-3">
-        ${product.price}
-        </Card.Text>
+        <Card.Text className="my-3">{product.name}</Card.Text>
+        <Card.Text className="my-3">${product.price}</Card.Text>
+        <div className="actions">
+          <button onClick={() => onAdd(product)} className="button">
+            + Add To Cart
+          </button>
+        </div>
       </Card.Body>
     </Card>
   );
