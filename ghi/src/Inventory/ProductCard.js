@@ -1,33 +1,48 @@
 // Dependencies
-import { React } from "react";
+import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 // import ProductItemForm from "./FoodProductForm";
 
 // CSS
 import "../Styles/ProductCard.css";
+import addtocart from "../Images/addtocart.png";
 
-export default function ProductCard(props) {
-  const { product, onAdd } = props;
-  // console.log(props)
+export default function ProductCard({ product }) {
+  const [showCartButton, setCartButton] = useState(false);
+
+  function showButton() {
+    setCartButton(true);
+  }
+
+  function hideButton() {
+    setCartButton(false);
+  }
 
   return (
     <Card className="my-3 p-3 rounded border-0">
-      <Card.Img className="rounded-corners" src={product.picture_url} />
-      <Card.Body>
-        <Card.Title>
-          {product.name}
-        </Card.Title>
-        <Card.Text className="my-3">
-          ${product.price}
-        </Card.Text>
-        {/* <div>
-            <ProductItemForm/>
-        </div> */}
-        <div className="actions">
-          <button onClick={() => onAdd(product)} className="button">
-            + Add To Cart
+      <div
+        className="image-container"
+        onMouseEnter={showButton}
+        onMouseLeave={hideButton}
+      >
+        <Card.Img
+          className="product-image"
+          src={product.picture_url}
+          alt={product.name}
+        />
+        {showCartButton && (
+          <button className="btn-xs btn-light rounded-pill cart-button">
+            <img src={addtocart} className="icon" alt="icon" />
           </button>
-        </div>
+        )}
+      </div>
+      <Card.Body className="card-text-padding">
+        <Card.Text className="my-3">
+        {product.name}
+        </Card.Text>
+        <Card.Text className="my-3">
+        ${product.price}
+        </Card.Text>
       </Card.Body>
     </Card>
   );

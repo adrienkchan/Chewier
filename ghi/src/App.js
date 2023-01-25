@@ -19,6 +19,9 @@ function GetToken() {
   return null;
 }
 
+const domain = /https:\/\/[^/]+/;
+const basename = process.env.PUBLIC_URL.replace(domain, "");
+
 function App(props) {
   const [cartItems, setCartItems] = useState([]);
 
@@ -57,7 +60,7 @@ function App(props) {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <AuthProvider>
         <GetToken />
         <Nav onShowCart={showCartHandler} countCartItems={cartItems.length} />
