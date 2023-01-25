@@ -5,26 +5,15 @@ import { Card } from "react-bootstrap";
 
 // CSS
 import "../Styles/ProductCard.css";
-import addtocart from "../Images/addtocart.png";
+// import addtocart from "../Images/addtocart.png";
 
 export default function ProductCard(props) {
-  const [showCartButton, setCartButton] = useState(false);
   const { product, onAdd } = props;
-
-  function showButton() {
-    setCartButton(true);
-  }
-
-  function hideButton() {
-    setCartButton(false);
-  }
 
   return (
     <Card className="my-3 p-3 rounded border-0">
       <div
         className="image-container"
-        onMouseEnter={showButton}
-        onMouseLeave={hideButton}
       >
         <Card.Img
           className="product-image"
