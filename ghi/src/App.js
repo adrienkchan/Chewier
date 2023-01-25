@@ -8,7 +8,7 @@ import PetForm from "./PetForm";
 import PetList from "./PetList";
 import Nav from "./Nav";
 import SignupForm from "./Accounts/SignupForm";
-import ProductList from "./Inventory/ProductList";
+import ProductPage from "./Inventory/ProductPage";
 import LogInForm from "./LoginForm";
 import Cart from "./Cart/Cart";
 import "./App.css";
@@ -67,7 +67,7 @@ function App(props) {
             path="products"
             element={
               <>
-                <ProductList onAdd={onAdd} />
+                <ProductPage onAdd={onAdd} />
                 {cartIsShown && (
                   <Cart
                     onAdd={onAdd}
