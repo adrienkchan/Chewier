@@ -24,9 +24,11 @@ export default function ProductPage() {
   const filteredItems = getFilteredItems(query, products)
   const [copyProducts, setCopyProducts] = useState([]);
 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getProducts() {
+      setLoading(true);
       const url = `${process.env.REACT_APP_INVENTORY_HOST}/products`;
       const response = await fetch(url);
       if (response.ok) {
@@ -34,6 +36,7 @@ export default function ProductPage() {
         setProducts(data);
         setCopyProducts(data);
       }
+      setLoading(false);
     }
     getProducts();
   }, []);
@@ -51,6 +54,13 @@ export default function ProductPage() {
   }
  }
 
+  if (loading) {
+    return (
+      <div className="center-div">
+        Loading some Chewier goodies... ᶠᵉᵉᵈ ᵐᵉ /ᐠ-ⱉ-ᐟ\ﾉ
+      </div>
+    );
+  }
 
   return (
     <div className="products-page">
@@ -89,3 +99,13 @@ export default function ProductPage() {
     </div>
   );
 }
+
+// {Array.isArray(products) &&
+//   products.length > 0 &&
+//   products.map((product) => (
+//     <Col sm={12} md={4} lg={3} key={product.id}>
+//       <div className="product-card">
+//         <ProductCard product={product} />
+//       </div>
+//     </Col>
+//   ))}
