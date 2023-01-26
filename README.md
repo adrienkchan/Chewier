@@ -1,10 +1,15 @@
 ## CHEWIER
 
 Hutch Rhees
-Aexander McKelvey
+
+Alexander McKelvey
+
 Lauren Lowe
+
 Adrien Chan
+
 Suk Chung
+
 
 Chewier - For when the bowl is empty and they start to guilt trip you
 A pet food e-commerce site that includes the option to create your own customized pet food formula.
@@ -12,6 +17,7 @@ A pet food e-commerce site that includes the option to create your own customize
 
 ## DESIGN
 [API Design](api-design.md)
+
 link wireframes
 
 
