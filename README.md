@@ -16,9 +16,9 @@ A pet food e-commerce site that includes the option to create your own customize
 
 
 ## DESIGN
-[label](docs/api-design.md)
+[API Design](docs/api-design.md)
 
-[label](docs/wireframes.md)
+[Wireframes](docs/wireframes.md)
 
 ## TARGET CUSTOMER/AUDIENCE
 
