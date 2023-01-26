@@ -1,3 +1,7 @@
+01/26/23
+
+
+
 01/25/23
 Today I worked on:
 Filter buttons and unit tests.
@@ -14,6 +18,10 @@ Today I worked on:
 
 01/20/23
 Today I worked on:
+
+Suk and I began working on CI/CD, with setting up the Caprover Instance and deploying the accounts microservice.
+
+
 
 01/19/23
 Today I worked on:
