@@ -1,6 +1,8 @@
 import classes from "./Cart.module.css";
 import "./Cart.css";
 import CartModal from "./CartModal";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "../Auth";
 
 const Cart = (props) => {
   const { cartItems, onAdd, onRemove } = props;
@@ -8,35 +10,109 @@ const Cart = (props) => {
   const taxPrice = itemsPrice * 0.0725;
   const shippingPrice = itemsPrice > 150 ? 0 : 9.99;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
+  const [customs, setCustoms] = useState([]);
+  const { token } = useAuthContext();
+  const [cartItemsClone, setCartItemsClone] = useState([]);
+  const [customFoodCount, setCustomFoodCount] = useState(0);
+
+  // Getting all custom food
+  useEffect(() => {
+    async function getCustoms() {
+      const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/customs`;
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setCustoms(
+          data.filter((custom) => custom.account_id === token?.account.id)
+        );
+      }
+    }
+    getCustoms();
+  }, [setCustoms, token?.account.id]);
+
+  // clone custom food and cart items into cart clone
+  useEffect(() => {
+    const custom_food = customs.reduce((a, v) => {
+      return [...a, { ...v, qty: 1 }];
+    }, []);
+    setCartItemsClone([...custom_food, ...cartItems]);
+  }, [customs, cartItems]);
+
+  useEffect(() => {
+    setCustomFoodCount(customs.length);
+  }, [customs]);
+
+  // useEffect(() => {
+  //   if (cartItemsClone.length !== 0) {
+  //     customs.map((custom_food) => {setCartItemsClone([...cartItemsClone, {...custom_food, qty: 1}])})
+  //   }
+  // }, [customs])
+
+  const onAddCustom = (custom) => {
+    const exist = cartItemsClone.find((x) => x.id === custom.id);
+    if (exist) {
+      setCartItemsClone(
+        cartItemsClone.map((x) =>
+          x.id === custom.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+      setCustomFoodCount(customFoodCount + 1);
+    } else {
+      setCartItemsClone([...cartItemsClone, { ...custom, qty: 1 }]);
+      setCustomFoodCount(customFoodCount + 1);
+    }
+  };
+
+  const onRemoveCustom = (custom) => {
+    const exist = cartItemsClone.find((x) => x.id === custom.id);
+    if (exist.qty === 1) {
+      setCartItemsClone(cartItemsClone.filter((x) => x.id !== custom.id));
+      setCustomFoodCount(customFoodCount - 1);
+    } else {
+      setCartItemsClone(
+        cartItemsClone.map((x) =>
+          x.id === custom.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+      setCustomFoodCount(customFoodCount - 1);
+    }
+  };
 
   console.log("CARTITEMS", props);
   return (
     <CartModal onClose={props.onClose}>
       <h1>Cart Items</h1>
       <div>
-        {cartItems.length === 0 && (
-          <div>
-            <strong>Cart Is Empty</strong>
-            <div>Click outside of cart to close!</div>
-          </div>
-        )}
-        {cartItems.map((item) => (
+        {cartItemsClone.length === 0 && <div>Cart Is Empty</div>}
+        {cartItemsClone.map((item) => (
           <div key={item.id} className="row">
             <div className="col-2">{item.name}</div>
             <div className="col-2">
-              <button className="add" onClick={() => onAdd(item)}>
-                +
-              </button>
-              <button onClick={() => onRemove(item)} className="remove">
-                -
-              </button>
+              {item.goal ? (
+                <button onClick={() => onAddCustom(item)} className="add">
+                  +
+                </button>
+              ) : (
+                <button onClick={() => onAdd(item)} className="add">
+                  +
+                </button>
+              )}
+              {item.goal ? (
+                <button onClick={() => onRemoveCustom(item)} className="remove">
+                  -
+                </button>
+              ) : (
+                <button onClick={() => onRemove(item)} className="remove">
+                  -
+                </button>
+              )}
             </div>
             <div className="col-2 text-right">
               {item.qty} x ${item.price.toFixed(2)}
             </div>
           </div>
         ))}
-        {cartItems.length !== 0 && (
+        {cartItemsClone.length !== 0 && (
           <>
             <hr></hr>
             <div className={classes.actions}>
@@ -55,11 +131,27 @@ const Cart = (props) => {
             </div>
             <div>
               <div>Items Price</div>
-              <div>${itemsPrice.toFixed(2)}</div>
+              {/* {console.log(customs)}
+              {console.log(
+                customs.filter(
+                  (custom) => custom.account_id === token?.account.id
+                ) !== []
+                  ? 100
+                  : 0
+              )} */}
+              <div>
+                $
+                {((customs.length !== 0 ? parseFloat(customFoodCount * 70.99) : 0) +
+                  parseFloat(itemsPrice)).toFixed(2)}
+              </div>
             </div>
             <div>
               <div>Taxes</div>
-              <div>${taxPrice.toFixed(2)}</div>
+              <div>
+                $
+                {((customs.length !== 0 ? parseFloat(customFoodCount * 70.99 * 0.0725) : 0) +
+                  parseFloat(taxPrice)).toFixed(2)}
+              </div>
             </div>
             <div>
               <div>Shipping Fee</div>
@@ -68,7 +160,11 @@ const Cart = (props) => {
             <div>
               <div>Total Price</div>
               <div>
-                <strong>${totalPrice.toFixed(2)}</strong>
+                <strong>
+                  $
+                  {((customs.length !== 0 ? parseFloat(customFoodCount * 70.99 * 1.0725) : 0) +
+                    parseFloat(totalPrice)).toFixed(2)}
+                </strong>
               </div>
             </div>
           </>

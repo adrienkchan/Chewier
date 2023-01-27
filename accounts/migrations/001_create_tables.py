@@ -41,12 +41,13 @@ steps = [
             activity VARCHAR(1000) NOT NULL,
             protein VARCHAR(1000) NOT NULL,
             state VARCHAR(1000) NOT NULL,
-            account_id INT NOT NULL REFERENCES accounts(id)
+            account_id INT NOT NULL REFERENCES accounts(id),
+            price NUMERIC DEFAULT 70.99,
+            name VARCHAR(1000) DEFAULT 'Custom Food' NOT NULL
         );
         """,
         """
         DROP TABLE customs
         """,
     ],
-
 ]
