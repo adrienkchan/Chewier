@@ -48,7 +48,6 @@ export default function Nav(props) {
             <li className="nav-item dropdown navsize">
               <a
                 className="nav-link dropdown-toggle text-white"
-                href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -85,7 +84,6 @@ export default function Nav(props) {
               <li className="nav-item dropdown navsize navbarspacing">
                 <a
                   className="nav-link dropdown-toggle text-white"
-                  href="#"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
