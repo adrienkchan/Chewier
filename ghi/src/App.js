@@ -60,18 +60,19 @@ function App(props) {
   };
 
   return (
-      <BrowserRouter>
-        <AuthProvider>
-          <GetToken />
-          <Nav onShowCart={showCartHandler} countCartItems={cartItems.length} />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route
-              path="products"
-              element={
-                <>
-                  <ProductList onAdd={onAdd} />
-                  {cartIsShown && <Cart
+    <BrowserRouter basename={basename}>
+      <AuthProvider>
+        <GetToken />
+        <Nav onShowCart={showCartHandler} countCartItems={cartItems.length} />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route
+            path="products"
+            element={
+              <>
+                <ProductPage onAdd={onAdd} />
+                {cartIsShown && (
+                  <Cart
                     onAdd={onAdd}
                     onRemove={onRemove}
                     cartItems={cartItems}
@@ -95,8 +96,6 @@ function App(props) {
       </AuthProvider>
     </BrowserRouter>
   );
-
 }
-
 
 export default App;

@@ -1,11 +1,7 @@
 // Dependencies
-<<<<<<< HEAD
-import { NavLink } from "react-router-dom";
-=======
 import { useState, useEffect } from "react";
 import { useToken } from "./Auth";
 import { NavLink, useNavigate } from "react-router-dom";
->>>>>>> development2
 import NavCartButton from "./Cart/NavCartButton";
 
 // CSS
