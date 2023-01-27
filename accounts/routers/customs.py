@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, Optional
+from typing import List, Union, Optional
 from queries.customs import Error, CustomIn, CustomOut, CustomRepository
 
 router = APIRouter()
