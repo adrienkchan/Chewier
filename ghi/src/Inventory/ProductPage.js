@@ -8,7 +8,7 @@ import ProductCard from "./ProductCard";
 
 //CSS
 
-export default function ProductList(props) {
+export default function ProductPage(props) {
    const { onAdd } = props;
    const [products, setProducts] = useState([]);
 

@@ -5,21 +5,26 @@ import CartModal from "./CartModal";
 const Cart = (props) => {
   const { cartItems, onAdd, onRemove } = props;
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-  const taxPrice = itemsPrice * 0.14;
+  const taxPrice = itemsPrice * 0.0725;
   const shippingPrice = itemsPrice > 150 ? 0 : 9.99;
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
   console.log("CARTITEMS", props);
   return (
     <CartModal onClose={props.onClose}>
-      <h2>Cart Items</h2>
+      <h1>Cart Items</h1>
       <div>
-        {cartItems.length === 0 && <div>Cart Is Empty</div>}
+        {cartItems.length === 0 && (
+          <div>
+            <strong>Cart Is Empty</strong>
+            <div>Click outside of cart to close!</div>
+          </div>
+        )}
         {cartItems.map((item) => (
           <div key={item.id} className="row">
             <div className="col-2">{item.name}</div>
             <div className="col-2">
-              <button onClick={() => onAdd(item)} className="add">
+              <button className="add" onClick={() => onAdd(item)}>
                 +
               </button>
               <button onClick={() => onRemove(item)} className="remove">
