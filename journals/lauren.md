@@ -8,7 +8,6 @@ I wrote up our ReadMe and imported images for the wireframes markdown file
 I learned about how to drag and drop png files into VSCode, as well as dragging in other markdown files to create links to them.  This will be super useful going forward when making ReadMes for future projects.
 
 
-
 01/25/23
 
 Today I worked on:
@@ -16,7 +15,8 @@ Today I worked on:
 
 I finalized the filter button code with Adrien, and created my unit test.  We then continued working on deployment.
 
-I'm picking up more on UseEffect, and ways it can be useful when using functional coding in React as opposed to class based.
+I'm picking up more on UseEffect, and ways it can be useful when using functional coding in React.
+
 
 01/24/23
 
@@ -25,6 +25,8 @@ Today I worked on:
 
 I worked some more on filter buttons, and toward the end of the day Adrien helped as I was having issues with getting my code to function and retrieve the data to alter the display.
 
+Filters are harder than I was expecting, since the data being accessed isn't contained in the front end.
+
 
 01/23/23
 
@@ -32,6 +34,7 @@ Today I worked on:
 * Filter buttons
 
 I reviewed some resources online (React documentation, YouTube videos, assorted tutorials, etc) to learn more about how to create a filter button that would let us filter the inventory.  I began some code mockup.
+
 
 01/20/23
 
@@ -82,6 +85,7 @@ Today I worked on:
 
 Those of us who worked on the inventory microservice backend began reviewing React resources (lectures, documentation, etc) while Adrien and Alex finished resolving auth issues on the accounts backend.  Afterwards the whole team worked together on merging the two microservice development branches into main, which included double checking all functionality post-merge.   We then delegated out front end microservices, and discussed some of the basics of our plans for the UI/UX layout.
 
+
 01/11/23
 Today I worked on:
 * The inventory microservice backend
@@ -94,6 +98,7 @@ Today I worked on:
 * The inventory microservice backend
 
 Hutch, Suk, and I utilized VSCode liveshare and a Discord voice channel to continue working on the backend for the inventory microservice and began testing the code in Swagger.
+
 
 01/09/23
 Today I worked on:
