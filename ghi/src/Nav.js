@@ -46,14 +46,14 @@ export default function Nav(props) {
               </NavLink>
             </li>
             <li className="nav-item dropdown navsize">
-              <a
-                className="nav-link dropdown-toggle text-white"
-                role="button"
+              <button
+                className="nav-link dropdown-toggle text-white dropdown"
+                type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Shop
-              </a>
+              </button>
               <div className="dropdown-menu">
                 <NavLink
                   className="dropdown-item"
@@ -82,14 +82,14 @@ export default function Nav(props) {
             )}
             {loggedIn ? (
               <li className="nav-item dropdown navsize navbarspacing">
-                <a
-                  className="nav-link dropdown-toggle text-white"
-                  role="button"
+                <button
+                  className="nav-link dropdown-toggle text-white dropdown"
+                  type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Account
-                </a>
+                </button>
                 <div className="dropdown-menu">
                   <NavLink
                     className="dropdown-item"
